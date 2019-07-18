@@ -1,16 +1,15 @@
 package server;
 
-import java.io.BufferedReader;
+import domain.Mapa;
+import domain.User;
+
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.nio.Buffer;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 /**
  * Created by federicoberon on 12/07/2019.
@@ -21,21 +20,24 @@ public class Server {
 
     private static int PORT = 8887;
 
-    private static List<ClientHandler> clientHandlers = new ArrayList<ClientHandler>();
-    private static ExecutorService pool = Executors.newFixedThreadPool(4);
+    static List<User> users = new ArrayList<User>();
 
-
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
         ServerSocket listener = new ServerSocket(PORT);
 
-        while(true){
-            System.out.println("[SERVER] Waiting for client connection .. ");
+        while (true){
             Socket client = listener.accept();
-            System.out.println("[SERVER] Connected to client");
-            ClientHandler clientThread = new ClientHandler(client, clientHandlers);
-            clientHandlers.add(clientThread);
-            pool.execute(clientThread);
+            ObjectInputStream input = new ObjectInputStream(client.getInputStream());
+            User user = (User) input.readObject();
+            System.out.println(user.getFirstName());
+            input.close();
+            users.add(user);
+
+//            ObjectOutputStream output = new ObjectOutputStream(client.getOutputStream());
+//            output.writeObject(new Mapa());
+//            output.close();
         }
+
     }
 
     public static String getName(){
