@@ -15,6 +15,8 @@ public class ClientHandler implements Runnable {
     private Socket client;
     private BufferedReader in;
     private PrintWriter out;
+    private boolean active;
+
     private List<ClientHandler> clientHandlers;
 
     public ClientHandler(Socket clientSockeet, List<ClientHandler> clientHandlers) throws IOException {
