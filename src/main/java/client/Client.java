@@ -10,7 +10,7 @@ import java.net.Socket;
  */
 public class Client {
 
-    public static final String SERVER_IP = "127.0.0.1";
+    public static final String SERVER_IP = "192.168.0.129";
     public static final int PORT = 8887;
 
     public static void main(String[] args) throws IOException, ClassNotFoundException {

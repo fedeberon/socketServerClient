@@ -15,7 +15,6 @@ public class ClientHandler implements Runnable {
     private Socket client;
     private BufferedReader in;
     private PrintWriter out;
-    private boolean active;
 
     private List<ClientHandler> clientHandlers;
 
