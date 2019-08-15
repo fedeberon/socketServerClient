@@ -19,7 +19,6 @@ public class ServerConection implements Runnable {
         this.server = s;
         in = new BufferedReader(new InputStreamReader(server.getInputStream()));
         out = new PrintWriter(server.getOutputStream(), true);
-
     }
 
     public void run() {

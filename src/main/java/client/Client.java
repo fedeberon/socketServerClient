@@ -13,14 +13,12 @@ import java.net.Socket;
  */
 public class Client {
 
-    public static final String SERVER_IP = "192.168.0.129";
+    public static final String SERVER_IP = "localhost";
     public static final int PORT = 8887;
 
     public static void main(String[] args) throws IOException {
         Socket socket = new Socket(SERVER_IP, PORT);
-
         ServerConection serverConection = new ServerConection(socket);
-
         BufferedReader keyboard =  new BufferedReader(new InputStreamReader(System.in));
         PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
 
